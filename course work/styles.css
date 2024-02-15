@@ -290,7 +290,7 @@ header {
 }
 
 .proverb-word {
-    font-size: 50px;
+    font-size: 32px;
     margin: 10px;
     cursor: pointer;
     padding: 5px 10px;
@@ -299,4 +299,40 @@ header {
     user-select: none; /* Предотвращает выделение текста */
     cursor: move;
     
+}
+
+.alphabet-word
+{
+        font-size: 32px;
+        margin: 10px;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: rgb(35, 50, 187); /* Базовый цвет текста, можно изменить */
+        user-select: none; /* Предотвращает выделение текста */
+        
+}
+.alphabet-word:hover {
+    animation: flickerAnimation 1s infinite;
+}
+
+.correct-word
+{
+    font-size: 32px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(35, 187, 81); /* Базовый цвет текста, можно изменить */
+    user-select: none; /* Предотвращает выделение текста */
+}
+
+.uncorrect-word{
+    font-size: 32px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(187, 45, 35); /* Базовый цвет текста, можно изменить */
+    user-select: none; /* Предотвращает выделение текста */
 }
