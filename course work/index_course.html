@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Time Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="jake_face.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <img src="adventure_time_logo.png" alt="Adventure Time Logo">
+            </div>
+            <nav class="navigation">
+                <a href="../index.html" class="nav-button">Главная</a>
+                <a href="../site/index.html" class="nav-button">Задания</a>
+                <a href="index_course.html" class="nav-button">Игра</a>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <div class="game-frame">
+        <div id="gameInfo">
+            <div class="hearts-container">
+                <img src="img/heart.png" alt="Heart">
+                <img src="img/heart.png" alt="Heart">
+                <img src="img/heart.png" alt="Heart">
+            </div>
+            <h2>Уровень: 1</h2>
+            <div id="progressBarContainer">
+                <div id="timer">30</div>
+                <div id="progressBar">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Cюда размещать мини игры -->
+
+        <div id="colorGame" class="game-content">
+            <!-- Слова  будут генерироваться здесь -->
+        </div>
+        
+    </div>
+    
+        <img id="animatedImage" src="img/iceKing.png" alt="Снежный король" style="display:none;">
+        <div class="speech-bubble" id="speechBubble" style="display:none;">
+            <p id="typingText">Давай вместе решим Задачки Снежного короля!</p>
+        </div>
+        <img id="animatedImage1" src="img/lady.png" alt="Леди Ливнерог" style="display:none;">
+
+    <footer>
+        <p>© 2024 Adventure Time. All rights reserved.</p>
+        </footer>
+    <script src="script.js"></script>
+
+
+    <div id="levelDescriptionModal" class="modal">
+        <div class="modal-content">
+            <h2>Уровень 1</h2>
+            <p>Жми на слова в порядке цветов радуги!</p>
+            <button id="startLevelButton">Готов!</button>
+        </div>
+    </div>
+    <div id="level1DescriptionModal" class="modal">
+        <div class="modal-content">
+            <h2>Уровень 2</h2>
+            <p>Привет я текст номер 2</p>
+            <button id="startLevelButton1">Готов!</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

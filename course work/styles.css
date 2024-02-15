@@ -1,0 +1,302 @@
+html, body {
+    height: 100%; /* Задает полную высоту для html и body */
+    margin: 0; /* Убираем стандартные отступы */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Элементы внутри body теперь организуются вертикально */
+    min-height: 120vh; /* Минимальная высота = 100% от высоты видимой области браузера */
+    background-image: url('background 1.jpg'); /* Путь к вашему изображению */
+    background-size: cover; /* Покрывает весь экран, сохраняя пропорции */
+    background-position: center; /* Центрирует изображение */
+    background-repeat: no-repeat; /* Предотвращает повторение изображения */
+    background-attachment: fixed;
+}
+
+.content {
+    flex: 1; /* Элемент .content теперь растягивается, чтобы заполнить доступное пространство */
+    padding: 20px;
+    text-align: center;
+}
+
+
+h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-top: 500px;
+    
+}
+
+header {
+    background-color: #6fbfee;
+    padding: 20px 0; /* Обновлено для обеспечения паддинга сверху и снизу */
+    position: sticky;
+    top: 0; /* Фиксирует позицию шапки в верхней части страницы */
+    z-index: 1000; 
+}
+
+.header-inner {
+    display: flex; /* Включаем flexbox для выравнивания элементов */
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    align-items: center; /* Центрируем элементы по вертикали */
+    max-width: 1200px; /* Можно задать максимальную ширину контейнера */ /* Центрирование контейнера */
+    padding: 0 20px; /* Паддинг для небольшого отступа от краев экрана */
+}
+
+.logo img {
+    max-width: 150px; /* Убедитесь, что логотип не слишком большой */
+}
+.navigation {
+    text-align: center;
+
+}
+
+.nav-button {
+    background-color: #FFD700;
+    color: #333;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+
+
+
+.game-frame {
+    position: relative;
+    top: 40%; /* Смещение от верха на 50% высоты родителя */
+    left: 50%; /* Смещение от левого края на 50% ширины родителя */
+    width: 1000px; /* Ширина рамки */
+    height: 600px; /* Высота рамки */
+    border: 5px solid #000; /* Чёрная рамка */
+    background-color: #fff; /* Белый фон внутри рамки */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень для красоты */
+    /* Используем transform для точного центрирования рамки */
+    transform: translate(-50%, -50%); /* Смещаем рамку назад на 50% её ширины и высоты */
+    overflow: hidden;
+}
+
+.game-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-word {
+    font-size: 24px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(145, 134, 241); /* Базовый цвет текста, можно изменить */
+    user-select: none; /* Предотвращает выделение текста */
+    
+}
+
+@keyframes flickerAnimation {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .color-word:hover {
+      animation: flickerAnimation 1s infinite;
+  }
+  
+  #colorGame {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Выравнивание элементов по вертикали */
+    justify-content: center; /* Выравнивание элементов по горизонтали */
+    height: 100%; /* Убедитесь, что у контейнера есть высота */
+}
+
+#gameInfo {
+    margin-bottom: 20px; /* Добавляет отступ от плашки до игрового контейнера */
+    text-align: center; /* Центрирует текст внутри плашки */
+    padding: 10px; /* Добавляет небольшой внутренний отступ для визуального комфорта */
+    background-color: #f0f0f0; /* Легкий фон для контраста с фоном страницы */
+    border-radius: 5px; /* Скругляет углы плашки */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляет небольшую тень для лучшей визуальной отделенности */
+}
+
+#gameInfo h2 {
+    margin: 0 0 10px 0; /* Убирает стандартные отступы и добавляет отступ снизу для заголовка */
+    color: #333; /* Цвет текста для заголовка */
+}
+
+.modal {
+    display: none; /* Скрыть рамку по умолчанию */
+    position: fixed; /* Фиксированное позиционирование */
+    z-index: 1; /* Поверх всех элементов */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ширина на весь экран */
+    height: 100%; /* Высота на весь экран */
+    overflow: auto; /* Если нужно прокручивать */
+    background-color: rgba(0,0,0,1); /* Цвет фона с полупрозрачностью */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Расположение по центру и немного ниже верхнего края */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ширина содержимого */
+    max-width: 600px; /* Максимальная ширина */
+    opacity: 0.95; /* Полупрозрачность содержимого */
+}
+
+
+#progressBarContainer {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#progressBar {
+    height: 20px;
+    width: 100%;
+    background-color: green;
+    border-radius: 5px;
+    text-align: center;
+    transition: width 1s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to left, red, yellow, green);
+}
+
+#timer {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+#animatedImage {
+    position: fixed; /* Фиксированное позиционирование относительно вьюпорта */
+    right: 5%; /* Отступ справа */
+    top: 50%; /* Расположение по центру по вертикали */
+    transform: translateY(-50%); /* Сдвиг вверх на половину высоты изображения для центрирования */
+    display: block; /* Переключение отображения для начала анимации */
+    opacity: 0; /* Начальная прозрачность для анимации появления */
+    transition: opacity 2s ease-in-out; /* Плавное изменение прозрачности */
+    width: 20%;
+    height: auto;
+    animation: slideInFromRight 1s ease-out forwards;
+}
+#animatedImage1 {
+    position: fixed; /* Фиксированное позиционирование относительно вьюпорта */
+    left: 3%; /* Отступ справа */
+    top: 50%; /* Расположение по центру по вертикали */
+    transform: translateY(-50%); /* Сдвиг вверх на половину высоты изображения для центрирования */
+    display: block; /* Переключение отображения для начала анимации */
+    opacity: 0; /* Начальная прозрачность для анимации появления */
+    transition: opacity 2s ease-in-out; /* Плавное изменение прозрачности */
+    width: 20%;
+    height: auto;
+    animation: slideInFromLeft 1s ease-out forwards;
+}
+
+/* Анимация появления */
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%); /* Изначально изображение находится справа за пределами экрана */
+      opacity: 0; /* Изображение полностью прозрачное */
+    }
+    100% {
+      transform: translateX(0); /* Изображение перемещается в свою конечную позицию */
+      opacity: 1; /* Изображение становится полностью непрозрачным */
+    }
+  }
+  
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%); /* Изначально изображение находится справа за пределами экрана */
+      opacity: 0; /* Изображение полностью прозрачное */
+    }
+    100% {
+      transform: translateX(0); /* Изображение перемещается в свою конечную позицию */
+      opacity: 1; /* Изображение становится полностью непрозрачным */
+    }
+  }
+
+  .speech-bubble {
+    position: absolute;
+    width: max-content;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #000;
+    bottom: 50%; /* Расположение над изображением */
+    left: 13%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#typingText {
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 4s steps(50, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+}
+
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.hearts-container img {
+    width: 20px; /* Ширина сердца */
+    height: auto; /* Автоматическая высота, чтобы сохранить пропорции */
+    margin-right: 5px; /* Отступ между сердечками */
+}
+
+.proverb-word {
+    font-size: 50px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(145, 134, 241); /* Базовый цвет текста, можно изменить */
+    user-select: none; /* Предотвращает выделение текста */
+    cursor: move;
+    
+}
