@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function gameOver() {
         // Ваш код для обработки завершения игры (например, вывод сообщения о проигрыше)
         alert("Вы проиграли");
+        location.reload();
     }
 
     function removeHeart() {
@@ -80,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const partsOfSpeech = ["Существительные", "Прилагательные", "Глаголы", "Наречия"];
+
     const randPoF = Math.floor(Math.random() * partsOfSpeech.length)
 
     function completeLevel3(){
@@ -128,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function() {
     startLevelButton.onclick = function() {
         modal.style.display = "none";
         startTimer(30, timerElement);
-        // Здесь можно добавить дополнительный код для начала уровня игры
             var img = document.getElementById("animatedImage");
             var img1 = document.getElementById("animatedImage1");
             var speechBubble = document.getElementById("speechBubble");
@@ -315,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
     return result;
         }
-
+        let security = 0;
         // Создаем элементы для каждого выбранного слова и добавляем их в контейнер
         alphaDict.forEach(word => {
             const wordElement = document.createElement("div");
@@ -338,12 +339,13 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Если все слова были выбраны верно
                   //  alert("Поздравляем! Вы завершили уровень!");
                     completeLevel3();
+                    security++;
                     // Дополнительные действия по завершению уровня
                     // Например, вызов функции, которая подготовит следующий уровень или завершит игру
                 }
             } else {
                 // Если выбранное слово неправильное
-                if(clickedWord.length < 20)
+                if(clickedWord.length < 20 && security === 0)
                 {
                     removeHeart(); // Удаляем сердечко
                 }
@@ -354,109 +356,141 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     };
 
+    
+    function level4() {
 
-    function level4(){
+
+        function getRandomWords(wordsByPartOfSpeech) {
+            let selectedWords = [];
+            let selectedIndexes = new Set(); // Множество для хранения уже выбранных индексов
+            for (let i = 0; i < wordsByPartOfSpeech.length; i++) {
+                const words = wordsByPartOfSpeech[i];
+                while (selectedWords.length < (i + 1) * 2) {
+                    const randomIndex = Math.floor(Math.random() * words.length);
+                    if (!selectedIndexes.has(randomIndex)) {
+                        selectedIndexes.add(randomIndex); // Добавляем индекс в множество выбранных
+                        selectedWords.push(words[randomIndex]); // Добавляем слово в результат
+                    }
+                }
+                selectedIndexes.clear(); // Очищаем множество выбранных индексов для следующего массива
+            }
+            return selectedWords;
+        }
+        
+        
+
         document.getElementById("startLevelButton3").addEventListener("click", function() {
-
-
-            // Скрываем модальное окно с описанием второго уровня
+            // Скрываем модальное окно с описанием третьего уровня
             const level1Modal = document.getElementById("level3DescriptionModal");
             level1Modal.style.display = "none";
             startTimer(30, timerElement);
-
             levelElement.textContent = "Уровень: 4";
+    
+            // Получаем выбранные слова для уровня 4
+            const selectedWords = getRandomWords(wordsByPartOfSpeech);
+    
+            // Отображаем выбранные слова в контейнере
+            const wordContainer = document.getElementById("colorGame");
+            selectedWords.forEach(word => {
+                const wordElement = document.createElement("div");
+                wordElement.classList.add("alphabet-word");
+                wordElement.textContent = word;
+                wordContainer.appendChild(wordElement);
+            });
+    
+            let fin = 0;
+            // Добавляем обработчик события click для слов в контейнере
+            wordContainer.addEventListener("click", function(event) {
 
-            function getRandomWords(wordsByPartOfSpeech) {
+                const clickedWord = event.target.textContent;
+                console.log(clickedWord);
+    
+                // Проверяем, к какой части речи относится выбранное слово
+                switch (randPoF) {
+                    case 0:
+                        if (wordsByPartOfSpeech[0].includes(clickedWord)) {
+                            console.log('Существительное');
+                            console.log(clickedWord);
+                            console.log(wordsByPartOfSpeech[0].includes(clickedWord));
+                            console.log(wordsByPartOfSpeech[0]);
 
-                let selectedWords = [];
-                let selectedIndexes = new Set(); // Множество для хранения уже выбранных индексов
-                for (let i = 0; i < wordsByPartOfSpeech.length; i++) {
-                    const words = wordsByPartOfSpeech[i];
-                    while (selectedWords.length < (i + 1) * 2) {
-                        const randomIndex = Math.floor(Math.random() * words.length);
-                        if (!selectedIndexes.has(randomIndex)) {
-                            selectedIndexes.add(randomIndex); // Добавляем индекс в множество выбранных
-                            selectedWords.push(words[randomIndex]); // Добавляем слово в результат
+                            event.target.classList.add("correct-word");
+                            fin++;
                         }
-                    }
-                    selectedIndexes.clear(); // Очищаем множество выбранных индексов для следующего массива
-                }
-                return selectedWords;
-            }
+                        else {
+                            if (clickedWord.length < 20) {
+                                removeHeart();
+                            }
+                        }
+                        break;
+                    case 1:
+                        console.log('Прилагательное');
+                        console.log(clickedWord);
+                        console.log(wordsByPartOfSpeech[1].includes(clickedWord));
+                        console.log(wordsByPartOfSpeech[1]);
 
-                const selectedWords = getRandomWords(wordsByPartOfSpeech);
-                const wordContainer = document.getElementById("colorGame");
+                        if (wordsByPartOfSpeech[1].includes(clickedWord)) {
+                            event.target.classList.add("correct-word");
+                            fin++;
+                        }
+                        else {
+                            if (clickedWord.length < 20) {
+                                removeHeart();
+                            }
+                        }
+                        break;
+                    case 2:
+                        console.log('Глагол');
+                        console.log(clickedWord);
+                        console.log(wordsByPartOfSpeech[2].includes(clickedWord));
+                        console.log(wordsByPartOfSpeech[2]);
+                        if (wordsByPartOfSpeech[2].includes(clickedWord)) {
+                            event.target.classList.add("correct-word");
+                            fin++;
+                        }
+                        else {
+                            if (clickedWord.length < 20) {
+                                removeHeart();
+                            }
+                        }
+                        break;
+                    case 3:
+                        console.log('Наречие');
+                        console.log(clickedWord);
+                        console.log(wordsByPartOfSpeech[3].includes(clickedWord));
+                        console.log(wordsByPartOfSpeech[3]);
 
-                wordContainer.addEventListener("click", function(event) {
+                        if (wordsByPartOfSpeech[3].includes(clickedWord)) {
+                            event.target.classList.add("correct-word");
+                            fin++;
+                        }
+                        else {
+                            if (clickedWord.length < 20) {
+                                removeHeart();
+                            }
+                        }
+                        break;
+                    default:
+                        console.error("Неправильное значение randPoF:", randPoF);
+                }
 
-                    const clickedWord = event.target.textContent;
-                    console.log(clickedWord);
-                    // Проверяем, к какой части речи относится выбранное слово
-    switch (randPoF) {
-        case 0:
-            // Если выбран массив существительных, проверяем, есть ли слово в нем
-            if (wordsByPartOfSpeech[0].includes(clickedWord)) {
-                event.target.classList.add("correct-word"); // Делаем слово зеленым
-            } else {
-                if(clickedWord.length < 20)
-                {
-                    removeHeart(); // Удаляем сердечко
+                console.log("fin = ", fin);
+                if (fin >= 2) {
+                    const princessImage = document.getElementById("PrincessImage");
+                    princessImage.style.display = "block";
+    
+                    const speechBubble = document.getElementById("speechBubble");
+                    const typingText = document.getElementById("typingText");
+                    typingText.textContent = "Молодец! Мы спасли принцессу";
+                    clearInterval(interval);
                 }
-            }
-            break;
-        case 1:
-            // Аналогично для других частей речи
-            if (wordsByPartOfSpeech[1].includes(clickedWord)) {
-                event.target.classList.add("correct-word"); // Делаем слово зеленым
-            } else {
-                if(clickedWord.length < 20)
-                {
-                    removeHeart(); // Удаляем сердечко
-                }
-            }
-            break;
-        case 2:
-            if (wordsByPartOfSpeech[2].includes(clickedWord)) {
-                event.target.classList.add("correct-word"); // Делаем слово зеленым
-            } else {
-                if(clickedWord.length < 20)
-                {
-                    removeHeart(); // Удаляем сердечко
-                }
-            }
-            break;
-        case 3:
-            if (wordsByPartOfSpeech[3].includes(clickedWord)) {
-                event.target.classList.add("correct-word"); // Делаем слово зеленым
-            } else {
-                if(clickedWord.length < 20)
-                {
-                    removeHeart(); // Удаляем сердечко
-                }
-            }
-            break;
-        default:
-            console.error("Неправильное значение randPoF:", randPoF);
-    }
-                });
-
-
-                selectedWords.forEach(word => {
-                    const wordElement = document.createElement("div");
-                    wordElement.classList.add("alphabet-word");
-                    wordElement.textContent = word;
-                    wordContainer.appendChild(wordElement);
-                });
-                
-                 // Определение возможных частей речи
 
             });
 
 
-
-
-
+        });
     }
+
 
     generateColorWords();
     level2();

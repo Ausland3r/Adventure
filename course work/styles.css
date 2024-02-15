@@ -336,3 +336,24 @@ header {
     color: rgb(187, 45, 35); /* Базовый цвет текста, можно изменить */
     user-select: none; /* Предотвращает выделение текста */
 }
+
+@keyframes princess-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+#PrincessImage {
+    width: 200px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: princess-appear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Применяем анимацию */
+}
