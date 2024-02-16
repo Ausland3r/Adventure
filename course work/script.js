@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Дополнительные цвета для текста, чтобы увеличить шансы на уникальность, чтобы не совсем сильно сливались с фоном
     const textColors = ["maroon", "chocolate", "gold", "lime", "teal", "navy", "purple", "black", "gray"];
 
-
+    let Userscore = 0;
     const proverbs = [
         "Цыплят по осени считают",
         "Что посеешь, то и пожнешь",
@@ -27,6 +27,51 @@ document.addEventListener("DOMContentLoaded", function() {
         ["быстро", "медленно", "тихо", "громко", "внимательно", "легко", "тщательно"] // Наречия
     ];
     
+
+
+
+    let users = [
+        { name: "Лимонохват", score: 510 },
+        { name: "Бимо", score: 750 },
+        { name: "Джейк", score: 650 },
+        { name: "Гантер", score: 500 },
+        { name: "Стив", score: 400 }
+    ];
+    
+    // Функция для отображения списка пользователей на странице
+    function renderLeaderboard(users) {
+        const userList = document.getElementById("userList");
+        userList.innerHTML = "";
+        users.forEach((user, index) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${index + 1}. ${user.name} - ${user.score}`;
+            userList.appendChild(listItem);
+        });
+    }
+    
+    // Сортировка пользователей по убыванию их рейтинга
+    function sortUsersByScore(users) {
+        return users.slice().sort((a, b) => b.score - a.score);
+    }
+    
+    // Обновление списка пользователей на странице
+    function updateLeaderboard() {
+        const sortedUsers = sortUsersByScore(users);
+        renderLeaderboard(sortedUsers);
+    }
+    
+    // Добавление нового пользователя в рейтинговую таблицу
+    function addUserToLeaderboard(name, score) {
+        users.push({ name, score });
+        updateLeaderboard();
+    }
+
+
+
+
+
+
+
     
 
 
@@ -54,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (lives > 0) {
             hearts[lives - 1].style.display = 'none';
             lives--;
+            Userscore -= 50;
         }
         if (lives === 0) {
             gameOver();
@@ -192,6 +238,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     currentIndex++;
                     this.style.backgroundColor = "green";
                     this.style.color = "white";
+                    Userscore+=200;
                     setTimeout(() => {
                         this.style.backgroundColor = originalBackgroundColor;
                         this.style.color = originalTextColor;
@@ -274,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const arrangedProverb = wordContainer.textContent;
                     if (arrangedProverb === proverbWithoutSpaces) {
                       //  alert("Поздравляем! Поговорка упорядочена верно!");
+                      Userscore+=200;
                         completeLevel2();
                     }
                 });
@@ -334,6 +382,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Если выбранное слово правильное
                 event.target.classList.add("correct-word"); // Делаем слово зеленым
                 currentIndex++; // Переходим к следующему слову
+                Userscore+=50;
 
                 if (currentIndex === selectedWords.length) {
                     // Если все слова были выбраны верно
@@ -476,6 +525,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 console.log("fin = ", fin);
                 if (fin >= 2) {
+                    Userscore+=200;
                     const princessImage = document.getElementById("PrincessImage");
                     princessImage.style.display = "block";
     
@@ -483,6 +533,21 @@ document.addEventListener("DOMContentLoaded", function() {
                     const typingText = document.getElementById("typingText");
                     typingText.textContent = "Молодец! Мы спасли принцессу";
                     clearInterval(interval);
+                    document.getElementById("leaderboard").style.display = "block";
+                    document.getElementById("inputContainer").style.display = "block";
+                    document.getElementById("submitButton").addEventListener("click", function() {
+                        const userNameInput = document.getElementById("userNameInput");
+                        const userName = userNameInput.value.trim();
+                        if (userName !== "") {
+                            // Добавляем нового пользователя в таблицу с начальным рейтингом
+                            addUserToLeaderboard(userName, Userscore);
+                            // Очищаем поле ввода имени
+                            userNameInput.value = "";
+                        } else {
+                            alert("Please enter a valid name!");
+                        }
+                    });
+                    updateLeaderboard();
                 }
 
             });
