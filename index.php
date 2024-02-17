@@ -29,6 +29,9 @@
     <img src="Jake.png" alt="Description" class="img-animate">
 <!-- Добавьте столько картинок, сколько вам нужно -->
 
+    <?php
+    echo "Hello, World!";
+    ?>
 
     <footer>
         <p>© 2024 Adventure Time. All rights reserved.</p>

@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
     const colors = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый"];
     const colors_copy = ["Красный", "Оранжевый", "Желтый", "Зеленый", "Голубой", "Синий", "Фиолетовый"];
-    const colorStyles = ["red", "orange", "yellow", "SeaGreen", "cyan", "blue", "violet"];
+    const colorStyles = ["red", "orange", "yellow", "seagreen", "cyan", "blue", "violet"];
+    const colorStyles_copy = ["red", "orange", "yellow", "seagreen", "cyan", "blue", "violet"];
 
     // Дополнительные цвета для текста, чтобы увеличить шансы на уникальность, чтобы не совсем сильно сливались с фоном
     const textColors = ["maroon", "chocolate", "gold", "lime", "teal", "navy", "purple", "black", "gray"];
@@ -116,12 +117,15 @@ document.addEventListener("DOMContentLoaded", function() {
         level1Modal.style.display = "block";
     }
 
+    const randomOption1 = Math.random() < 0.5 ? "Алфавитном порядке (От А до Я)" : "Обратном Алфавитном порядке (От Я до А)";
     function completeLevel2(){
             // Очищаем содержимое контейнера с цветами
             const gameContainer = document.getElementById("colorGame");
             gameContainer.innerHTML = '';
-        
+
             // Показываем модальное окно с описанием второго уровня
+            const descriptionParagraph2 = document.querySelector("#level2DescriptionModal p");
+            descriptionParagraph2.textContent = `Выбирай слова в ${randomOption1}`;
             const level1Modal = document.getElementById("level2DescriptionModal");
             level1Modal.style.display = "block";
     }
@@ -169,8 +173,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
 
+    const randomOption = Math.random() < 0.5 ? "Цвета" : "Слова";
 
     window.onload = function() {
+
+        const descriptionParagraph1 = document.querySelector("#levelDescriptionModal p");
+        descriptionParagraph1.textContent = `Собери радугу используя ${randomOption}`;
+
         modal.style.display = "block";
     }
     startLevelButton.onclick = function() {
@@ -217,6 +226,8 @@ document.addEventListener("DOMContentLoaded", function() {
         shuffleArray(colorStyles);
 
 
+
+
         colors.forEach((color, index) => {
             const word = document.createElement("div");
             word.classList.add("color-word");
@@ -226,44 +237,78 @@ document.addEventListener("DOMContentLoaded", function() {
             const textColor = getRandomTextColor(backgroundColor);
             word.style.color = textColor;
             word.textContent = color;
-
+            gameContainer.appendChild(word);
 
             word.onclick = function() {
                 const originalBackgroundColor = this.style.backgroundColor;
                 const originalTextColor = this.style.color;
                 const textContent = this.textContent.trim();
 
-                if (textContent === colors_copy[currentIndex]) {
-                    // Если выбранный цвет правильный, двигаемся к следующему цвету
-                    currentIndex++;
-                    this.style.backgroundColor = "green";
-                    this.style.color = "white";
-                    Userscore+=200;
-                    setTimeout(() => {
-                        this.style.backgroundColor = originalBackgroundColor;
-                        this.style.color = originalTextColor;
-                    }, 1000); // Задержка 1 секунда
-
-                    if (currentIndex === colors.length) {
-                        // Пользователь выбрал все цвета в правильном порядке, можно выполнить действия по завершению уровня
-                       // alert('Вы выиграли!');
-                        
-                        // Дополнительные действия, когда пользователь выигрывает
-                        completeLevel1();
+                if(randomOption === "Слова"){
+                    if (textContent === colors_copy[currentIndex]) {
+                        // Если выбранный цвет правильный, двигаемся к следующему цвету
+                        currentIndex++;
+                        this.style.backgroundColor = "green";
+                        this.style.color = "white";
+                        Userscore+=200;
+                        setTimeout(() => {
+                            this.style.backgroundColor = originalBackgroundColor;
+                            this.style.color = originalTextColor;
+                        }, 1000); // Задержка 1 секунда
+    
+                        if (currentIndex === colors.length) {
+                            // Пользователь выбрал все цвета в правильном порядке, можно выполнить действия по завершению уровня
+                           // alert('Вы выиграли!');
+                            
+                            // Дополнительные действия, когда пользователь выигрывает
+                            completeLevel1();
+                        }
+                    } else {
+                        // Если выбранный цвет неправильный, удаляем сердечко
+                        removeHeart();
+                        this.style.backgroundColor = "red";
+                        this.style.color = "white";
+                        setTimeout(() => {
+                            this.style.backgroundColor = originalBackgroundColor;
+                            this.style.color = originalTextColor;
+                        }, 1000); // Задержка 1 секунда
                     }
-                } else {
-                    // Если выбранный цвет неправильный, удаляем сердечко
-                    removeHeart();
-                    this.style.backgroundColor = "red";
-                    this.style.color = "white";
-                    setTimeout(() => {
-                        this.style.backgroundColor = originalBackgroundColor;
-                        this.style.color = originalTextColor;
-                    }, 1000); // Задержка 1 секунда
                 }
+                else
+                {
+                    if (originalBackgroundColor === colorStyles_copy[currentIndex]) {
+                        // Если выбранный цвет правильный, двигаемся к следующему цвету
+                        currentIndex++;
+                        this.style.backgroundColor = "green";
+                        this.style.color = "white";
+                        Userscore+=200;
+                        setTimeout(() => {
+                            this.style.backgroundColor = originalBackgroundColor;
+                            this.style.color = originalTextColor;
+                        }, 1000); // Задержка 1 секунда
+    
+                        if (currentIndex === colors.length) {
+                            // Пользователь выбрал все цвета в правильном порядке, можно выполнить действия по завершению уровня
+                           // alert('Вы выиграли!');
+                            
+                            // Дополнительные действия, когда пользователь выигрывает
+                            completeLevel1();
+                        }
+                    } else {
+                        // Если выбранный цвет неправильный, удаляем сердечко
+                        removeHeart();
+                        this.style.backgroundColor = "red";
+                        this.style.color = "white";
+                        setTimeout(() => {
+                            this.style.backgroundColor = originalBackgroundColor;
+                            this.style.color = originalTextColor;
+                        }, 1000); // Задержка 1 секунда
+                    }
+                }
+                
 
             };
-            gameContainer.appendChild(word);
+
         });
     }
 
@@ -348,7 +393,19 @@ document.addEventListener("DOMContentLoaded", function() {
              // Выбираем 10 случайных слов из массива alphabetWords
             selectedWords = getRandomWords(alphabetWords, 10);
             const alphaDict = selectedWords.slice();
-            selectedWords.sort();
+
+            if(randomOption1 === "Алфавитном порядке (От А до Я)")
+            {
+                selectedWords.sort();
+            }
+            else
+            {
+                selectedWords.sort((a, b) => {
+                    return b.localeCompare(a);
+                });
+                
+            }
+
             // Сортируем выбранные слова в алфавитном порядке
             function getRandomIndex(max) {
                 return Math.floor(Math.random() * max);
@@ -388,7 +445,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // Если все слова были выбраны верно
                   //  alert("Поздравляем! Вы завершили уровень!");
                     completeLevel3();
-                    security++;
+                    security++; //переменная страховки, чтобы условие третьего уровня проверялись только во время третьего уровня
                     // Дополнительные действия по завершению уровня
                     // Например, вызов функции, которая подготовит следующий уровень или завершит игру
                 }

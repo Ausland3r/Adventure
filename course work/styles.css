@@ -5,9 +5,9 @@ html, body {
 
 body {
     display: flex;
-    flex-direction: column; /* Элементы внутри body теперь организуются вертикально */
-    min-height: 120vh; /* Минимальная высота = 100% от высоты видимой области браузера */
-    background-image: url('background 1.jpg'); /* Путь к вашему изображению */
+    flex-direction: column;
+    min-height: 120vh;
+    background-image: url('background 1.jpg'); /* Путь к изображению */
     background-size: cover; /* Покрывает весь экран, сохраняя пропорции */
     background-position: center; /* Центрирует изображение */
     background-repeat: no-repeat; /* Предотвращает повторение изображения */
@@ -57,7 +57,7 @@ header {
 }
 
 .logo img {
-    max-width: 150px; /* Убедитесь, что логотип не слишком большой */
+    max-width: 150px;
 }
 .navigation {
     text-align: center;
@@ -114,7 +114,7 @@ header {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-    color: rgb(145, 134, 241); /* Базовый цвет текста, можно изменить */
+    color: rgb(145, 134, 241); /* Базовый цвет текста */
     user-select: none; /* Предотвращает выделение текста */
     
 }
@@ -134,7 +134,7 @@ header {
     flex-wrap: wrap;
     align-items: flex-start; /* Выравнивание элементов по вертикали */
     justify-content: center; /* Выравнивание элементов по горизонтали */
-    height: 100%; /* Убедитесь, что у контейнера есть высота */
+    height: 100%; /* у контейнера есть высота */
 }
 
 #gameInfo {
@@ -160,7 +160,7 @@ header {
     width: 100%; /* Ширина на весь экран */
     height: 100%; /* Высота на весь экран */
     overflow: auto; /* Если нужно прокручивать */
-    background-color: rgba(0,0,0,1); /* Цвет фона с полупрозрачностью */
+    background-color: rgba(0,0,0,1); /* Цвет фона с полупрозрачностью чтобы пользователь не мог подсмотреть, пока не начнет игру*/
     z-index:1001;
 }
 
@@ -239,7 +239,7 @@ header {
   
   @keyframes slideInFromLeft {
     0% {
-      transform: translateX(-100%); /* Изначально изображение находится справа за пределами экрана */
+      transform: translateX(-100%); /* Изначально изображение находится слева за пределами экрана */
       opacity: 0; /* Изображение полностью прозрачное */
     }
     100% {
@@ -300,7 +300,7 @@ header {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-    color: rgb(145, 134, 241); /* Базовый цвет текста, можно изменить */
+    color: rgb(145, 134, 241); /* Базовый цвет текста */
     user-select: none; /* Предотвращает выделение текста */
     cursor: move;
     
@@ -313,7 +313,7 @@ header {
         cursor: pointer;
         padding: 5px 10px;
         border-radius: 5px;
-        color: rgb(35, 50, 187); /* Базовый цвет текста, можно изменить */
+        color: rgb(35, 50, 187); /* Базовый цвет текста*/
         user-select: none; /* Предотвращает выделение текста */
         
 }
@@ -328,7 +328,7 @@ header {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-    color: rgb(35, 187, 81); /* Базовый цвет текста, можно изменить */
+    color: rgb(35, 187, 81); /* Базовый цвет текста */
     user-select: none; /* Предотвращает выделение текста */
 }
 
@@ -338,7 +338,7 @@ header {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
-    color: rgb(187, 45, 35); /* Базовый цвет текста, можно изменить */
+    color: rgb(187, 45, 35); /* Базовый цвет текста*/
     user-select: none; /* Предотвращает выделение текста */
 }
 
